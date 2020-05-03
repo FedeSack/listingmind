@@ -45,8 +45,16 @@ listingmind.controller("appController", function ($http, $location, $route, $roo
     })
 });
 
-listingmind.controller("addController", function ($http, $scope) {
+listingmind.controller("addController", function ($http, $rootScope, $scope, SharedState) {
     let add = this;
+
+    SharedState.initialize($scope, 'activeTab');
+
+    if($rootScope.categories.length > 0){
+        SharedState.set("activeTab", 1);
+    }else{
+        SharedState.set("activeTab", 2);
+    }
 
     add.createCategory = function(newCategory){
         $http.post(url + "/category", {name: newCategory}).then(function () {

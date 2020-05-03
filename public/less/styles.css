@@ -68,6 +68,7 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  word-break: break-all;
 }
 .tasks li input {
   margin: 0.25em;

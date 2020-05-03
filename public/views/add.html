@@ -6,19 +6,19 @@
             <div class="section">
                 <ui-shared-state id="activeTab" default="1"></ui-shared-state>
                 <ul class="nav nav-tabs border-0">
-                    <li ui-class="{'active': activeTab == 1}" class="nav-item">
+                    <li ui-class="{'active': activeTab == 1}" class="nav-item" ng-hide="!app.categories.length > 0">
                         <a ui-set="{'activeTab': 1}">Task</a>
                     </li>
                     <li ui-class="{'active': activeTab == 2}" class="nav-item">
                         <a ui-set="{'activeTab': 2}">Category</a>
                     </li>
                 </ul>
-                <div ui-if="activeTab == 1">
+                <div ui-if="activeTab == 1" ng-hide="!app.categories.length > 0">
                     <form name="addTaskForm" ng-submit="add.createTask(task)" id="addTaskForm">
                         <div class="well mb-0 border-top-0">
                             <div class="mb-4">
                                 <label for="task">Task</label>
-                                <input name="task" id="task" type="text" ng-model="task.name" class="form-control" placeholder="Write your task" required>
+                                <input maxlength="100" name="task" id="task" type="text" ng-model="task.name" class="form-control" placeholder="Write your task" required>
                             </div>
                             <div>
                                 <label for="categorySelect">Select category</label>
@@ -36,7 +36,7 @@
                         <div class="well mb-0 border-top-0">
                             <div>
                                 <label for="category">Category</label>
-                                <input name="category" id="category" type="text" ng-model="category.name" class="form-control" placeholder="Write your category name" required>
+                                <input maxlength="25" name="category" id="category" type="text" ng-model="category.name" class="form-control" placeholder="Write your category name" required>
                             </div>
                         </div>
                         <div class="modal-footer border-0 pb-0 mx-auto w-50">
