@@ -82,4 +82,38 @@ app.post("/task", function (req, res) {
     })
 })
 
+app.delete("/category/:id", function (req, res) {
+    let id = req.params.id;
+    let category = new Category({_id: id});
+
+    category.remove(function (err) {
+        if(err){
+            return callback(err);
+        }else{
+            res.send();
+        }
+    })
+
+    Task.find({ categoryId: id},function(err,tasks){
+        if (err){
+            return callback(err);
+        }else{
+            tasks.forEach(function (task) {
+                let deletedTask = new Task(task)
+                deletedTask.remove(function (err) {
+                    res.send();
+                })
+            })
+        }
+    });
+})
+
+app.delete("/task/:id", function (req, res) {
+    let id = req.params.id;
+    let task = new Task({_id: id});
+    task.remove(function (err) {
+        res.send();
+    })
+})
+
 app.listen(3000);
