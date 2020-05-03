@@ -1,0 +1,72 @@
+body {
+  background-color: #eee !important;
+  display: grid;
+  grid-template-rows: auto 0px 3em;
+}
+footer {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+footer p {
+  line-height: 3em;
+  color: #ddd;
+  margin: 0;
+}
+button {
+  height: 3em;
+  width: 3em;
+  background-color: transparent;
+  border: none;
+}
+.modal-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center!important;
+}
+.card-block {
+  max-height: 75%;
+}
+a > i {
+  align-self: center;
+  margin: auto;
+}
+.categories > li {
+  width: auto;
+  display: grid;
+  grid-template-columns: auto 3em 3em;
+  grid-template-rows: 3em auto;
+  list-style-type: none;
+}
+.categories > li ul,
+.categories > li > p {
+  grid-column: 1 / -1;
+  grid-row: 2;
+}
+.categories > li:last-of-type {
+  margin-bottom: 0!important;
+}
+p {
+  height: 100%;
+  margin: 0;
+}
+.tasks li {
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: 3em auto 3em 3em;
+}
+.tasks li p {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.tasks li input {
+  margin: 0.25em;
+  height: calc(100% - 0.5em);
+  width: calc(100% - 0.5em);
+}
+h2 {
+  line-height: 3em;
+}
+/*# sourceMappingURL=styles.css.map */

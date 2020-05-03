@@ -1,0 +1,51 @@
+<div class="modal-backdrop in"></div>
+<div class="modal-dialog w-100 m-auto">
+    <div class="modal-content">
+        <h2 class="h3 text-center mb-0">Add task or category</h2>
+        <div ng-controller="addController as add">
+            <div class="section">
+                <ui-shared-state id="activeTab" default="1"></ui-shared-state>
+                <ul class="nav nav-tabs border-0">
+                    <li ui-class="{'active': activeTab == 1}" class="nav-item">
+                        <a ui-set="{'activeTab': 1}">Task</a>
+                    </li>
+                    <li ui-class="{'active': activeTab == 2}" class="nav-item">
+                        <a ui-set="{'activeTab': 2}">Category</a>
+                    </li>
+                </ul>
+                <div ui-if="activeTab == 1">
+                    <form name="addTaskForm" ng-submit="add.createTask(task)" id="addTaskForm">
+                        <div class="well mb-0 border-top-0">
+                            <div class="mb-4">
+                                <label for="task">Task</label>
+                                <input name="task" id="task" type="text" ng-model="task.name" class="form-control" placeholder="Write your task" required>
+                            </div>
+                            <div>
+                                <label for="categorySelect">Select category</label>
+                                <select class="form-control" name="categorySelect" id="categorySelect" ng-init="task.categoryId == category._id" ng-model="task.categoryId" ng-options="category._id as category.name for category in app.categories" required></select>
+                            </div>
+                        </div>
+                        <div class="modal-footer border-0 pb-0 mx-auto w-50">
+                            <button ui-turn-off="modalAdd" type="button" value="Cancel" class="btn btn-danger rounded-circle py-auto px-0" /><i class="fas fa-times fa-2x"></i></button>
+                            <button type="submit" value="Add" id="createTask" class="btn btn-success rounded-circle py-auto px-0" ng-disabled="addTaskForm.$invalid" /><i class="fas fa-check fa-2x"></i></button>
+                        </div>
+                    </form>
+                </div>
+                <div ui-if="activeTab == 2">
+                    <form name="addCategoryForm" ng-submit="add.createCategory(category.name)" id="addCategoryForm">
+                        <div class="well mb-0 border-top-0">
+                            <div>
+                                <label for="category">Category</label>
+                                <input name="category" id="category" type="text" ng-model="category.name" class="form-control" placeholder="Write your category name" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer border-0 pb-0 mx-auto w-50">
+                            <button ui-turn-off="modalAdd" type="button" value="Cancel" class="btn btn-danger rounded-circle py-auto px-0" /><i class="fas fa-times fa-2x"></i></button>
+                            <button type="submit" value="Add" id="createCat" class="btn btn-success rounded-circle py-auto px-0" ng-disabled="addCategoryForm.$invalid" /><i class="fas fa-check fa-2x"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
