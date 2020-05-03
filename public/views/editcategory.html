@@ -1,0 +1,18 @@
+<div class="modal-backdrop in"></div>
+<div class="modal-dialog w-100 m-auto">
+    <div class="modal-content">
+        <h2 class="h3 text-center mb-0">Edit category</h2>
+        <div class="modal-body" ng-controller="editController as edit">
+            <form name="editCategoryForm" novalidate ng-submit="editCategoryForm.$valid && edit.saveCategoryEdit(category)" id="editCategoryForm">
+                <div class="well m-0">
+                    <label for="category">Category</label>
+                    <input name="category" id="category" type="text" ng-model="category.name" ng-model-options="{ updateOn: 'submit' }" class="form-control" placeholder="{{ edit.name }}" required>
+                </div>
+                <div class="modal-footer border-0 pb-0 mx-auto w-50">
+                    <button  ui-turn-off="modalEditCategory" type="button" value="Cancel" class="btn btn-danger rounded-circle py-auto px-0" /><i class="fas fa-times fa-2x"></i></button>
+                    <button type="submit" value="Edit" id="save" class="btn btn-success rounded-circle py-auto px-0" /><i class="fas fa-check fa-2x"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -116,4 +116,44 @@ app.delete("/task/:id", function (req, res) {
     })
 })
 
+app.put("/category/:id", function (req, res) {
+    let id = req.params.id;
+    let name = req.body.name;
+
+    Category.findByIdAndUpdate(
+        { _id: id },
+        { name: name },
+        function (err) {
+            res.send();
+        }
+    );
+})
+
+app.put("/task/:id", function (req, res) {
+    let id = req.params.id;
+    let name = req.body.name;
+    let categoryId = req.body.categoryId;
+
+    Task.findByIdAndUpdate(
+        { _id: id },
+        { name: name, categoryId: categoryId },
+        function (err) {
+            res.send();
+        }
+    );
+})
+
+app.patch("/task/:id", function (req, res) {
+    let id = req.params.id;
+    let finished = req.body.finished;
+
+    Task.findByIdAndUpdate(
+        { _id: id },
+        { finished: finished },
+        function (err) {
+            res.send();
+        }
+    );
+})
+
 app.listen(3000);

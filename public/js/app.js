@@ -21,8 +21,8 @@ listingmind.controller("appController", function ($http, $location, $route, $roo
     app.getCollections = function () {
         $http.get(url).then(function (collections) {
             let collectionsData = collections.data;
-            app.categories = collectionsData.categories;
-            app.tasks = collectionsData.tasks;
+            $rootScope.categories = collectionsData.categories;
+            $rootScope.tasks = collectionsData.tasks;
         })
     };
     app.getCollections();
@@ -31,6 +31,18 @@ listingmind.controller("appController", function ($http, $location, $route, $roo
         $location.path("/home");
         app.getCollections();
     });
+
+    $rootScope.$watch('categories', function (newVal, oldVal) {
+        if(newVal != oldVal){
+            app.categories = $rootScope.categories;
+        }
+    })
+
+    $rootScope.$watch('tasks', function (newVal, oldVal) {
+        if(newVal != oldVal){
+            app.tasks = $rootScope.tasks;
+        }
+    })
 });
 
 listingmind.controller("addController", function ($http, $scope) {
@@ -70,3 +82,36 @@ listingmind.controller("deleteController", function ($http, $scope) {
         }
     }
 })
+
+
+listingmind.controller("editController", function ($http, $rootScope, $scope) {
+    let edit = this;
+
+    edit.editCategory = function (category) {
+        $rootScope.category = category;
+    }
+
+    edit.editTask = function (task) {
+        $rootScope.task = task;
+    }
+
+    edit.finishTask = function(finishedTask){
+        $http.patch(url + "/task/" + finishedTask._id, { finished: finishedTask.finished }).then(function () {
+            $scope.$emit('loadCollections');
+        })
+    }
+
+    edit.saveCategoryEdit = function(editedCategory){
+        $http.put(url + "/category/" + editedCategory._id, {name: editedCategory.name}).then(function () {
+            delete $rootScope.category;
+            $scope.$emit('loadCollections');
+        })
+    }
+
+    edit.saveTaskEdit = function(editedTask){
+        $http.put(url + "/task/" + editedTask._id, editedTask).then(function () {
+            delete $rootScope.task;
+            $scope.$emit('loadCollections');
+        })
+    }
+});

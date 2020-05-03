@@ -1,0 +1,25 @@
+<div class="modal-backdrop in"></div>
+<div class="modal-dialog w-100 m-auto">
+    <div class="modal-content">
+        <h2 class="h3 text-center mb-0">Edit task</h2>
+        <div class="modal-body" ng-controller="editController as edit">
+            <form name="editTaskForm" novalidate ng-submit="editTaskForm.$valid && edit.saveTaskEdit(task)" id="editTaskForm">
+                <div class="well m-0">
+                    <div class="mb-4">
+                        <label for="task">Task</label>
+                        <input name="task" id="task" type="text" ng-model="task.name" ng-model-options="{ updateOn: 'submit' }" class="form-control" placeholder="{{ edit.name }}" required>
+                    </div>
+                    <div>
+                        <label for="taskCategory">Select category</label>
+                        <select class="form-control" name="taskCategory" id="taskCategory" ng-model-options="{ updateOn: 'submit' }" ng-model="task.categoryId" ng-options="category._id as category.name for category in app.categories" required>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 pb-0 mx-auto w-50">
+                    <button ui-turn-off="modalEditTask" type="button" value="Cancel" class="btn btn-danger rounded-circle py-auto px-0" /><i class="fas fa-times fa-2x"></i></button>
+                    <button type="submit" value="Edit" id="save" class="btn btn-success rounded-circle py-auto px-0"/><i class="fas fa-check fa-2x"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
